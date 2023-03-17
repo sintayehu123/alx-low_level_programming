@@ -1,18 +1,20 @@
 #include "main.h"
+
 /**
- * *malloc_checked - program startup
- * @b: int being evaluated
-(*
- * Description: allocates memory using malloc)?
- * Return: return (0) is the required function signature
+ * malloc_checked - allocates memory.
+ * @b: the size to allocate.
+ *
+ * Return: pointer to allocated memory or 98 if failed.
  */
+
 void *malloc_checked(unsigned int b)
 {
-	void *memory = malloc(b);
+	char *ptr;
 
-	if (memory == NULL)
-	{
+	ptr = malloc(b);
+	if (ptr == NULL)
 		exit(98);
-	}
-	return (memory);
+
+	return (ptr);
+
 }

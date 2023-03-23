@@ -2,10 +2,10 @@
 #include <stdarg.h>
 #include <stdio.h>
 /**
- * print_numbers - returns the sum of all its parameters.
- * @n: amount of the arguments.
- *
- * Return: list of its parameters.
+ * print_numbers - Entry Point
+ * @separator: comma space
+ * @n: elements to be printed
+ * Return: void
  */
 void print_numbers(const char *separator, const unsigned int n, ...)
 {

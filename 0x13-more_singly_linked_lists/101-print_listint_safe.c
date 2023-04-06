@@ -7,19 +7,19 @@
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t count = 0;
+	size_t counter = 0;
 
 	while (head && head->next < head)
 	{
 		printf("[%p] %d\n", (void *) head, head->n);
-		count++;
+		counter++;
 		head = head->next;
 	}
 	if (head)
 	{
 		printf("[%p] %d\n", (void *) head, head->n);
-		count++;
+		counter++;
 		printf("-> [%p] %d\n", (void *) head->next, head->next->n);
 	}
-	return (count);
+	return (counter);
 }

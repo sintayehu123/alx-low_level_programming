@@ -1,59 +1,50 @@
 #include "lists.h"
-
 /**
- * delete_nodeint_at_index - deletes a node at an index
- * @head: pointer to the head of the list
- * @index: index of the node to be added
+ * listint_len - returns the number of elements in a linkedlisti\nt_t list
+* @h: a variable that points to a listint_t struct
+* Return: number of elements
+*/
+size_t listint_len(const listint_t *h)
+{
+	int counter = 0;
+
+	while (h != NULL)
+	{
+		counter++;
+		h = h->next;
+	}
+	return (counter);
+}
+/**
+ * delete_nodeint_at_index - deletes the node at index of a listint_t list
+ * @head: pointer to pointer to listint_t struct
+ * @index: index of node that should be deleted
  *
- * Return: the address of the node
+ * Return: 1 if it succeeded, -1 if it failed
  */
 int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
-	listint_t *old_node = NULL;
-	listint_t *previous_node = NULL;
-	unsigned int i = 0;
-	 list_len = listint_len(*head);
+	size_t length;
+	unsigned int i;
+	listint_t *prev_node = *head;
+	listint_t *tmp;
 
-	if ((index > list_len) || (list_len == 0))
+	length = listint_len(*head);
+	if (index >= length)
 		return (-1);
-	while (head != NULL)
+	if (index == 0)
 	{
-		if (i == index)
-		{
-			old_node = *head;
-			if (i == 0)
-			{
-				*head = old_node->next;
-				free(old_node);
-				return (1);
-			}
-			previous_node->next = old_node->next;
-			free(old_node);
-			return (1);
-		}
-		else if ((i + 1) == index)
-			previous_node = *head;
-		head = &((*head)->next);
-		i++;
+		tmp = *head;
+		*head = (*head)->next;
+		free(tmp);
+		return (1);
 	}
-	return (-1);
-}
 
-/**
- * listint_len - counts the number of nodes in a linked list
- * @h: head of the list
- *
- * Return: the number of elements
- */
-size_t listint_len(const listint_t *h)
-{
-	const listint_t *cursor = h;
-	size_t count = 0;
-
-	while (cursor != NULL)
-	{
-		count += 1;
-		cursor = cursor->next;
-	}
-	return (count);
+	for (i = 0; i < index - 1; i++)
+		prev_node = prev_node->next;
+	tmp = prev_node;
+	prev_node = prev_node->next;
+	tmp->next = prev_node->next;
+	free(prev_node);
+	return (1);
 }
